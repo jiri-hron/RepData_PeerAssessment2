@@ -15,13 +15,17 @@ download and extraction can be sourced by calling the function here:
 source("code/getData.R")
 ```
 
-The function 
+The function returned returns a path to archive file with the data, if called
+first or data were deleted, downloads it from the [Original link][0]
+If needed, please refer to my [repository][1] for more details. The code was not
+provided here, since the assignment description clearly states already 
+downloaded raw file should be used as a starting point.
 
 ### Reading the data
-Having the file downloaded, the file contained in the archive can be extracted
+Having the data downloaded, a file contained in the archive can be extracted
 and loaded into the memory:
 ```{r echo=TRUE, cache=TRUE}
-weather = read.csv(bzfile(get.data()),
+weather = read.csv(bzfile(getData()),
                    header = T,
                    sep = ",",
                    comment.char = "",
@@ -32,7 +36,7 @@ weather = read.csv(bzfile(get.data()),
 To be able to answer some the two questions stated in the assignment,
 two universal statistics need to be established so as to represent a total harm
 to public health and a total economical effect, respectively, of all the weather
-events.  
+events.
 For a total harm to public health, a simple statistic *HEALTH_DMG* was inffered
 from columns *FATALATIES* and *INJURIES* by weighting the fatalities to injuries
 caused by ratio 2:1. See following code for clarification:
@@ -56,17 +60,25 @@ recorded in the years before January, 1996 (refer to [Database Details][2]).
 Therefore, the data was not only grouped by event type (*EVTYPE*), but also by
 year (*YEAR*):
 ```{r echo=TRUE, cache=TRUE}
-weather$YEAR = year(as.Date(weather$BGN_DATE, "%m/%d/%Y %H:%M:%S"))
+weather$YEAR = as.factor(year(as.Date(weather$BGN_DATE, "%m/%d/%Y %H:%M:%S")))
 
 damage.by.event.year = aggregate(
         list(health.dmg = weather$HEALTH_DMG,
-             total.dmg = weather$TOTAL_DMG),
+             fatalities = weather$FATALITIES,
+             injuries = weather$INJURIES,
+             economical.dmg = weather$TOTAL_DMG),
         by = list(type = weather$EVTYPE,
                   year = weather$YEAR),
         sum)
 ```
 
 ## Results
+The results are splitted into two parts, each adressing one of the basic
+questions stated below:
+1. Across the United States, which types of events are most harmful with respect
+ to population health?
+2. Across the United States, which types of events have the greatest economic
+ consequences?  
 
 ### Most harmful weather events in respect to public health
 
@@ -76,8 +88,11 @@ damage.by.event.year = aggregate(
 cat("hello")
 ```
 
-[1]: https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2
+[0]: https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2
 "Original link"
+
+[1]: https://github.com/jiri-hron/RepData_PeerAssessment2
+"repository"
 
 [2]: http://www.ncdc.noaa.gov/stormevents/details.jsp
 "Database details"
