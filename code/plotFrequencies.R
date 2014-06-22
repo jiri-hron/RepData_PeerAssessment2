@@ -5,5 +5,5 @@ plotCounts = function(weather) {
     }
     
     g = ggplot(weather, aes(factor(EVTYPE)))
-    g + geom_bar()
+    g + e
 }

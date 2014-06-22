@@ -22,6 +22,7 @@ transformData = function(weather) {
         return(1);
     }
     
+    # normalize the values to their numeric form
     weather$PROPDMGEXP = sapply(weather$PROPDMGEXP, 
                                 getMultipliers,
                                 USE.NAMES=F);
@@ -39,19 +40,20 @@ transformData = function(weather) {
     
     
     # get the statistics of damage per year per event
-    damage.by.event <<- aggregate(
+    damage.by.event = aggregate(
         list(health.dmg = weather$HEALTH_DMG,
              injuries = weather$INJURIES,
              fatalities = weather$FATALITIES,
              prop.dmg = property.damage,
              crop.dmg = crop.damage,
-             economical.dmg = weather$TOTAL_DMG),
+             economic.dmg = weather$TOTAL_DMG),
         by = list(type = weather$EVTYPE),
         sum);
     
-    top.economical <<- damage.by.event[
-        order(damage.by.event$economical.dmg, decreasing = T),][1:10,];
-    
-    top.health <<- damage.by.event[
+    # take top ten causes of economic damages
+    top.economic = damage.by.event[
+        order(damage.by.event$economic.dmg, decreasing = T),][1:10,];
+    # take top ten causes of health damages
+    top.health = damage.by.event[
         order(damage.by.event$health.dmg, decreasing = T),][1:10,];
 }
