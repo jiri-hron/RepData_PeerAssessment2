@@ -150,7 +150,7 @@ respect to population health?</h3>
 The following figure shows the top ten most dangerous weather events to public 
 health based on the statistic with increased weight put on fatal injuries 
 (described above):
-``` {r echo=TRUE, fig.height=10, fig.width=11}
+``` {r echo=TRUE, fig.height=9, fig.width=10}
 # ensure ggplot2 and reshape2 are present
 if(!(require("ggplot2") * require("reshape2"))) {
     stop(paste("the ggplot2 and reshape2 package need to be installed",
@@ -197,7 +197,7 @@ economic consequences?</h3>
 Based on the total damages lost (or the estimates of the NOAA), the top ten
 causes of economic damages were depicted on the following figure:
 
-```{r echo = TRUE, fig.height=10, fig.width=11}
+```{r echo = TRUE, fig.height=9, fig.width=10}
 # ensure ggplot2 and reshape2 are present
 if(!(require("ggplot2") * require("reshape2"))) {
     stop(paste("the ggplot2 and reshape2 package need to be installed",

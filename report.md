@@ -6,11 +6,11 @@ Report is focused on basic analysis of [Storm data][0] provided by U.S. National
 National Oceanic and Atmospheric Administration. To reveal the main causes of
 the public health and economic damages, the data were summarized in respect to
 each of weather events present in the data set mentioned above. The top ten
-causes were by a visual analysis and compared for both categories of damages.
+causes were compared and identified for both kinds of damages.
 As the most profound types of weather events causing issues were identified
-floods, heats&droughts, tornadoes, typhoons and other strong wind-related 
+floods, heats & droughts, tornadoes, typhoons and other strong wind-related 
 records. The measures, that could help with both types of damages, are building
-systems of early warning in combination with prepared evacuation plans and
+systems of early warning in combination with prepared evacuation plans and also
 building flood barriers.
 
 ## Data Processing
@@ -219,7 +219,7 @@ top.health = damage.by.event[
 
 ## Results
 The results are split into two parts, each addressing one of the basic
-questions stated below:
+questions stated in headings of following sections:
 
 <h3>1. Across the United States, which types of events are most harmful with
 respect to population health?</h3>
@@ -317,7 +317,7 @@ ggplot(melted.economic, aes(x=type, y=value / 1e6, fill = variable)) +
 
 In comparison with previous figure, where Tornadoes dominate, the floods were
 the most serious cause of economic damages during the whole period. Very
-important is also understandable disappearance of all heat-related weather
+important is also an understandable disappearance of all heat-related weather
 events and their replacement with rather more destructive wind-related events
 like hurricanes and typhoons. Droughts ranged seventh, as one of the primary
 reasons for all crop damages. Measures to be taken in order to minimize economic
